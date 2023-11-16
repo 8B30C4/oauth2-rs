@@ -519,7 +519,7 @@ impl PkceCodeChallenge {
         assert!(code_verifier.secret().len() >= 43 && code_verifier.secret().len() <= 128);
 
         let digest = Sha256::digest(code_verifier.secret().as_bytes());
-        let code_challenge = base64::encode_config(&digest, base64::URL_SAFE_NO_PAD);
+        let code_challenge = base64::encode_config(&digest, base64::URL_SAFE);
 
         Self {
             code_challenge,
