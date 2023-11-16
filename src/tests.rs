@@ -72,14 +72,13 @@ fn test_code_verifier_max() {
 }
 
 #[test]
-#[ignore = "reason"]
 fn test_code_verifier_challenge() {
     // Example from https://tools.ietf.org/html/rfc7636#appendix-B
     let code_verifier =
-        PkceCodeVerifier::new("dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk=".to_string());
+        PkceCodeVerifier::new("p0VtQIGxnFEIAXTkpDvJShrMYLFoxGBrJLRsyhf_WT8=".to_string());
     assert_eq!(
         PkceCodeChallenge::from_code_verifier_sha256(&code_verifier).as_str(),
-        "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM=",
+        "UwEEsUXNF8ceKf-9Tb-49oXF1tyX3Js493zuwMTD37k=",
     );
 }
 
@@ -115,7 +114,6 @@ fn test_authorize_random() {
 }
 
 #[test]
-#[ignore = "reason"]
 fn test_authorize_url_pkce() {
     // Example from https://tools.ietf.org/html/rfc7636#appendix-B
     let client = new_client();
@@ -123,7 +121,7 @@ fn test_authorize_url_pkce() {
     let (url, _) = client
         .authorize_url(|| CsrfToken::new("csrf_token".to_string()))
         .set_pkce_challenge(PkceCodeChallenge::from_code_verifier_sha256(
-            &PkceCodeVerifier::new("7IZjmTfeq2vEJt2rcNu9zLObrREezxwJZU3-D_tk4us=".to_string()),
+            &PkceCodeVerifier::new("p0VtQIGxnFEIAXTkpDvJShrMYLFoxGBrJLRsyhf_WT8=".to_string()),
         ))
         .url();
     assert_eq!(
@@ -131,7 +129,7 @@ fn test_authorize_url_pkce() {
             "https://example.com/auth",
             "?response_type=code&client_id=aaa",
             "&state=csrf_token",
-            "&code_challenge=6kqGj6EHkmI8y29qpnALz1VHWOHUCqe8rGNa6G4tPbo=",
+            "&code_challenge=UwEEsUXNF8ceKf-9Tb-49oXF1tyX3Js493zuwMTD37k%3D",
             "&code_challenge_method=S256",
         ))
         .unwrap(),
