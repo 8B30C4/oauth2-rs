@@ -62,7 +62,7 @@ fn test_code_verifier_too_long() {
 #[test]
 fn test_code_verifier_min() {
     let code = PkceCodeChallenge::new_random_sha256_len(32);
-    assert_eq!(code.1.secret().len(), 43);
+    assert_eq!(code.1.secret().len(), 44); // URL_SAFE
 }
 
 #[test]

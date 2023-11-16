@@ -501,7 +501,7 @@ impl PkceCodeChallenge {
         let random_bytes: Vec<u8> = (0..num_bytes).map(|_| thread_rng().gen::<u8>()).collect();
         PkceCodeVerifier::new(base64::encode_config(
             &random_bytes,
-            base64::URL_SAFE_NO_PAD,
+            base64::URL_SAFE,
         ))
     }
 
